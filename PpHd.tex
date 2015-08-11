@@ -1,0 +1,145 @@
+%----------------------------------------------------------------------------
+% File          PpHd.tex
+% Author        Xia Jiazhi
+% Description   preamble: the global settings
+%-----------------------------------------------------------------------------
+
+\usepackage{subfigure,amssymb,epsfig,fancyheadings}
+\usepackage{subfigure}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{verbatim}
+%\usepackage[linesnumbered,boxed]{algorithm2e}
+
+\usepackage{mathptmx}
+\usepackage{mathptmx}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+%%\newtheorem{lem}{Lemma}
+\usepackage{parskip}
+\usepackage{latexsym, graphics,  amscd, amssymb}
+\usepackage{epsf}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pb-diagram}
+\usepackage{times}
+\usepackage{wasysym}
+
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-grad}
+\usepackage{pst-plot}
+%\usepackage{algorithm2e}
+\usepackage[bookmarks=true,bookmarksnumbered=true,pagebackref=true,breaklinks=true,letterpaper=true]{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{picins}% http://ctan.org/pkg/picins
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{wrapfig}
+\usepackage{lipsum}
+
+%\oddsidemargin +0.10in %
+%\evensidemargin +0.00in %
+\oddsidemargin +0.46in
+\evensidemargin +0.46in
+\topmargin +0.15in %
+\textheight +8.50in %
+%\textwidth +6.25in %
+\textwidth +5.80in %
+
+\pagestyle{plain}
+
+\font\Bold=cmbx10 scaled \magstep3
+\def\EndOfProof{\nolinebreak\ \hfill\rule{1.5mm}{2.7mm}}
+\def\endOfProof{\ \hfill\rule{1.5mm}{2.7mm}}
+
+\def\proof{\noindent \textbf{Proof:}\quad}
+
+%\renewcommand{\theequation}{\mbox{\rm Eq.\ \thechapter.\arabic{equation}}}
+
+\newcounter{theorem}
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\thechapter.\arabic{theorem}}
+
+\newcounter{lemma}
+\newtheorem{lemma}{Lemma}
+\renewcommand{\thelemma}{\thechapter.\arabic{lemma}}
+
+\newcounter{corollary}
+\newtheorem{corollary}{Corollary}
+\renewcommand{\thecorollary}{\thechapter.\arabic{corollary}}
+
+\newcounter{definition}
+\newtheorem{definition}{Definition}
+\renewcommand{\thedefinition}{\thechapter.\arabic{definition}}
+
+\newcounter{algo}
+\newtheorem{algo}{Algorithm}
+\renewcommand{\thealgo}{\thechapter.\arabic{algo}}
+
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand{\thesubfigure}{\thefigure.\alph{subfigure}}
+\makeatletter
+\renewcommand{\@thesubfigure}{\thesubfigure:\space}
+\renewcommand{\p@subfigure}{}
+
+\newcommand{\qed}{\hfill \mbox{\raggedright \rule{.07in}{.1in}}}
+
+
+\def\LEQ.#1.#2.#3{#1\!\leqslant\!#2\!\leqslant\!#3}
+\def\GEQ.#1.#2.#3{#1\!\geqslant\!#2\!\geqslant\!#3}
+\def\emptyset{\varnothing}
+\renewcommand{\theenumi}{\rm \roman{enumi}}
+\renewcommand{\labelenumi}{\rm (\theenumi)}
+\renewcommand{\theenumii}{\rm \alph{enumii}}
+\renewcommand{\labelenumii}{\rm (\theenumii)}
+
+\renewcommand{\topfraction}{0.75}
+\renewcommand{\bottomfraction}{0.75}
+\renewcommand{\textfraction}{0.10}
+
+\newcommand{\remark}[1]{\textsf{\textbf{\large #1}}}
+
+%
+% Report specific definitions
+%
+
+%
+% Definition in the context of this report.
+%
+\def\reporttitle    {Centroid Voronoi Diagram and Its Applications}
+\def\supp           {\varphi}
+\def\psupp          {\varphi^{\mathcal{P}}}
+\def\conf           {\delta}
+\def\pconf          {\delta^{\mathcal{P}}}
+\def\tab            {\hspace{0.8cm}}
+
+%
+% Define the set of symbols for the constraint set.
+%
+\def\map            {\Pi}
+\def\gen            {\Upsilon}
+\def\prune          {\Phi}
+\def\selcand        {\Psi}
+\def\compute        {\Theta}
+\def\check          {\Omega}
+
+%
+% The set of operators
+%
+\def\select         {\sigma}
+\def\proj           {\pi}
+\def\join           {\bowtie}
+\def\apply          {\mu}
+\def\undo           {\eta}
+\def\rename         {\leftarrow}
+
+\def\linespaceNormal        {\baselineskip=24pt}
+\def\linespaceTight         {\baselineskip=21pt}
+\def\linespaceVeryTight     {\baselineskip=19pt}
+
+
+\renewcommand{\bibname}{References}
+%
+%-----------------------------------------------------------------------------
+%==== The End Here ====
+% 

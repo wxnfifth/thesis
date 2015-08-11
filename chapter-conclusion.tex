@@ -1,0 +1,139 @@
+\chapter{Conclusions and Future Work}
+\label{conclusion}
+
+\section{Conclusions}
+\subsection{Parallel Computing 2D Voronoi Diagrams Using Sweepcircles}
+
+This chapter presents the untransformed sweepcircle
+algorithm for 2D Voronoi diagram. Our algorithm has the optimal
+$O(n\log n)$ time complexity and $O(n)$ space complexity. The
+classical sweep line algorithm is the degenerate form of our algorithm when the circle center is at infinity. Our
+algorithm is flexible in that it allows multiple circles at
+arbitrary locations to sweep the domain simultaneously, which
+naturally leads to a parallel implementation. It is easy to
+implement, without complicated numerical calculation. We demonstrate
+the efficacy of our parallel sweep circle algorithm using GPU.
+
+\subsection{Centroidal Voronoi Tessellation on Arbitrary Triangle Meshes}
+
+Although Voronoi diagrams in Euclidean space have been well studied
+ and understood, very little progress has been reported on computing
+ Voronoi diagrams on curved surfaces. In this report, we developed
+ an intrinsic algorithm to compute the geodesic Voronoi diagram~(GVD)
+ on a surface, and used GVD  to iteratively
+ compute a geodesic centroid Voronoi diagram on a surface.
+
+\section{Future Work}
+
+Computing intrinsic surface Voronoi Diagram
+and Centroidal Voronoi Tessellation requires efficient
+method to obtain geodesic distance. We developed an efficient
+and parallel method for computing
+discrete geodesic distance and plan to use it in calculating surface
+Voronoi, see~\ref{subsec:svg} for reference.
+Also, we can compute a Voronoi Diagram in $R^3$, and calculate
+the intersection of a 3D Voronoi Diagram and a surface. The result
+ is also a surface CVT. Also using
+Euclidean distance in 3D is not appropriate because it ignores
+the boundary condition of the surface.
+Thus, we need an efficient way to calculate intrinsic distance
+ in $R^3$, see~\ref{subsec:DIG} for reference.
+
+\subsection{Fast and Parallel Method for Computing Discrete Geodesic Distance}
+\label{subsec:svg}
+
+To compute an intrinsic CVT on surfaces,
+it is necessary to compute geodesic distances. However,
+the existing methods for calculating geodesic distance
+ are not fast enough.
+As a fundamental problem in geometric modeling, computing geodesics
+distance on triangle meshes has been widely studied.
+ Many elegant algorithms have been presented to compute geodesic distance, e.g.,the CH
+method~\cite{Chen_Han:1990}, the MMP
+method~\cite{Mitchell_Etc:1987} and the ICH method~\cite{Xin_Wang:2009}, the fast marching
+method~\cite{Kimmel_Sethian:1998} and the approximate MMP
+algorithm~\cite{Surazhsky_Etc:2005}. While the state-of-the-art
+approaches~\cite{Surazhsky_Etc:2005}~\cite{Xin_Wang:2009} work quite
+well for models of moderate size, they are not practical for
+large-scale models or time-critical applications due to their high
+computational cost.
+
+In order to compute geodesic distance field in real time,
+we need a faster algorithm and a more efficient method. The past decade
+has witnessed an increasing trend for the
+traditionally CPU-handled computation to be performed using
+ graphics processing unit
+(GPU), which uses large numbers of graphics chips to parallelize the
+computation. However, it is technically challenging to develop
+parallel algorithms for discrete geodesics due to the lack of
+parallel structure, i.e., the geodesic distance is propagated from
+the source to all destination in a sequential order. So far, the
+only parallel geodesic algorithm is that created by Weber et
+al.~\cite{weber2008parallel}, who developed a
+raster scan-based version of the fast marching algorithm. Although
+being highly efficient, their method computes only the first-order
+approximation of geodesic distance and also requires parameterizing the
+surface into a regular domain, which is usually difficult for
+surfaces with complicated geometry and/or topology.
+
+We present a new data structure, called the \textit{Saddle
+Vertex Graph} or SVG, which can be used to compute all types of
+discrete geodesics. The SVG is an undirected graph that has the same
+vertex set as the input triangle mesh. Each edge of the SVG corresponds
+to a geodesic path that does not pass through any saddle vertices.
+We call such a geodesic path \textit{direct}. The weight of the edge
+is the length of the corresponding direct geodesic path. The
+distinctive feature of the SVG is that it elegantly links the geodesic
+problem on meshes with the shortest path problem on graphs, i.e.,
+any geodesic path in the input mesh is the shortest path in the SVG.
+As a result, we can apply the classical Dijkstra's shortest path
+algorithm to compute all three types of discrete geodesics in a
+unified framework, and avoids complex geometry calculations. Thus we
+can use this method to compute intrinsic CVT in real time.
+
+\subsection{Computing Discrete Geodesics Distance in $R^3$ for a Surface CVT}
+\label{subsec:DIG}
+
+We can compute a Voronoi Diagram in $R^3$, and calculate
+the intersection of a 3D Voronoi Diagram and surface~\cite{Liu:2009:CVT}.
+ The result is surface CVT.
+ Using Euclidean distance in 3D is not quite suitable since it does not
+  take the boundary condition into
+account. Thus, we need an efficient  way to calculate intrinsic geodesic
+distance in $R^3$, we plan to calculate the geodesic
+ distance in tetrahedral meshes as a robust distance measurement.
+  The distance field in tetrahedral meshes
+ is very attractive in computer graphics and related fields.
+It is used for multi-body dynamics~\cite{guendelman2003nonconvex},
+ deformable objects~\cite{fisher2001deformed}, 
+ mesh generation~\cite{molino2003crystalline},
+ motion planning~\cite{hoff1999fast}, 
+ and sculpting~\cite{baerentzen2002manipulation}.
+ We will use it to calculate a 3D Voronoi Diagram, and
+ use the 3D Voronoi Diagram to intersect with a surface 
+ to get a surface CVT.
+
+The conventional fast marching method is tessellation dependent
+and very sensitive to the topological noise.
+To tackle these challenges, we present an intrinsic method for computing
+geodesics on tetrahedral meshes with noises.
+
+We prompt this method by the following
+intuition: Let $\Omega\subset\mathbb{R}^{3}$ be a planar domain
+with noises. Given two points $q, p\in \Omega$, we can
+calculate the Euclidean distance
+$d(q,p)=\sqrt{(p_x-q_x)^2+(p_y-q_y)^2+(p_z-q_z)^2}$ 
+easily, but the geodesic path $pq$ may
+be hindered by the gaps. Put differently, if $\Omega$ is
+planar, the shortest path inside $\Omega$ can pass \textit{through}
+the holes. We
+can change the classical wavefront algorithm based on this observation.
+Fast marching method keeps a wave increasing
+from the origin point to the target point. 
+one can flatten the \textit{spatial}
+boundary surfaces to the Euclidean space, when the wavefront gets 
+the boundary surfaces.
+Then we can  let the wavefront pass the boundaries by using the
+Euclidean distance in the tetrahedron mesh. The wavefront keeps
+increasing up the time when it gets all destinations.
+

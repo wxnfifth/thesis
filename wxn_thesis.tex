@@ -1,0 +1,82 @@
+%----------------------------------------------------------------------------
+% File          wxn_thesis.tex
+% Author        Wang Xiaoning
+% Description   The main control document of my dissertation
+%-----------------------------------------------------------------------------
+%\nonstopmode               % proxlogue, empty
+
+%\documentclass[12pt,a4paper,twoside]{report}
+%\documentclass[12pt,a4paper,oneside]{report}
+\documentclass[12pt,a4paper,oneside]{report}
+
+\input{PpHd.tex}            % preamble, settings for globle control
+
+
+\begin{document}
+
+\graphicspath{{figs/}}      % alpha
+
+\input{PpCover.tex}         % front cover page
+
+% for whole document
+\setlength{\baselineskip}{20pt plus 1pt minus 1pt}  % 1-1/2 spacing
+
+% ~~~~~~~ contents, list of figures, list of tables ~~~~~~~~~
+\pagenumbering{roman}       % page numbering with small roman digits
+                            % for preface and contents
+\input{PpPref.tex}          % preface: abstract, acknowledgement and vita
+
+% for whole document
+\setlength{\baselineskip}{20pt plus 1pt minus 1pt}  % 1-1/2 spacing
+
+\setcounter{secnumdepth}{3} % section numbering depth
+\setcounter{tocdepth}{2}    % count to the depth of sections
+\tableofcontents            % table of contents appears here
+
+\newpage
+
+\addcontentsline{toc}{section}{\numberline{}\hspace{-.35in}{\bf List of Figures}}
+\listoffigures              % list of figures appears here
+
+\newpage
+\addcontentsline{toc}{section}{\numberline{}\hspace{-.35in}{\bf List of Tables}}
+\listoftables              % list of tables appears here
+
+% ~~~~~~~ page style setting for main part ~~~~~~~
+\addtolength{\headheight}{3pt} \pagestyle{fancy}
+%h\setlength{\headrulewidth}{0.1pt}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter. #1}{}}
+\lhead{\fancyplain{}{\bfseries\footnotesize\sc\leftmark}} \rhead{}
+\addtolength{\headsep}{-0.1in}
+\cfoot{\fancyplain{}{\bfseries\rm\thepage}}
+
+\newpage
+\pagenumbering {arabic}     % page numbering with arabic
+
+% ~~~~~~~ text Part Of the dissertation ~~~~~~~~~
+% for whole document
+\setlength{\baselineskip}{24pt plus 1pt minus 1pt}  % 1-1/2 spacing
+
+\include{chapter-introduction}
+\include{chapter-relatedwork}
+\include{chapter-sweepcircle}
+\include{chapter-svg-cvt}
+\include{chapter-asd}
+%\include{chapter-test}
+\include{chapter-gcvt}
+\include{chapter-conclusion}
+
+% ~~~~~~~ bibliography ~~~~~~~~
+\newpage
+\setlength{\baselineskip}{20pt plus 1pt minus 1pt}  % 1-1/2 spacing
+
+\addcontentsline{toc}{chapter}{References}
+
+\small{
+\bibliographystyle{abbrv}
+\bibliography{wxn}
+}
+\end{document}
+%-----------------------------------------------------------------------------
+%==== The End Here ====
+% 
